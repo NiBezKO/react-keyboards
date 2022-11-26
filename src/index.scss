@@ -1,0 +1,132 @@
+@import "reset.scss";
+
+$white: #ffffff;
+$black: #000000;
+$font-f: 'Roboto';
+
+.wrapper {
+    
+    max-width: 1400px;
+    margin: 0px auto;
+}
+
+.header {
+    width: 100%;
+    max-width: 1400px;
+    top: 0;
+    left: 0;
+    //position: fixed;
+    z-index: 1000;
+    margin: 0 auto;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 0;
+
+        h2 {
+            font-family: $font-f;
+        }
+
+    }
+
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+
+    svg {
+        margin-right: 15px;
+        cursor: pointer;
+        fill: $black;
+        transition: fill 1s ease-in-out;
+        &:hover {
+            fill: gray;
+        }
+    }
+
+    p {
+       font-family: $font-f;
+       margin-right: 15px;
+    }
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
+    background: url("../public/img/introBG.jpg") center no-repeat;
+    background-size: cover;
+    color: $white;
+    width: 100%;
+
+    h1 {
+        font-size: 45px;
+        font-family: $font-f;
+        padding-top: 235px;
+        padding-bottom: 25px;
+        font-weight: bold;
+        text-shadow: (10px 0px 10px black);
+    }
+    
+    h2 {
+        font-size: 30px;
+        font-family: $font-f;
+        padding-bottom: 25px;
+        font-weight: 500;
+    }
+
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+
+    h2 {
+        font-family: $font-f;
+
+    }
+
+    button {
+        width: 60px;
+        height: 30px;
+        cursor: pointer;
+        border: 2px solid rgb(0, 0, 0);
+        background-color: rgb(99, 102, 99);
+        color: $white;
+        font-weight: 500 ;
+        font-size: 16px;
+        position: absolute;
+        transition: border-color,background-color 1s ease-in-out;
+        outline: none;
+        &:hover {
+            color: $black;
+            background-color: $white;
+            border-color: #000000;
+        }
+        &:focus {
+            outline: 4px black;
+        }
+
+    }
+
+    input {
+        height: 30px;
+        margin-left: 20px;
+        position: relative;
+        font-family: $font-f;
+        font-size: 16px;
+        outline: none;
+        border: none;
+        font-weight: 500 ;
+        color: $black;
+    }
+}
+
+.container {
+  display: flex;
+}
