@@ -1,9 +1,40 @@
 
 import './index.scss';
 
+const keyboards = [
+  {title: "", price: 5600 , imageURL: ""}
+]
+
+
 function App() {
   return (
     <div className="wrapper">
+      <div className='overlay'>
+        <div className='drawer'>
+          <div className='drawer__top'>
+            <h2>Корзина</h2>
+            <img className='closeBtn' src='/img/remove-btn.svg' alt="close"/>
+           </div>
+           <div className='items'>
+            <div className='cartItems'>
+              <img style={ {marginRight:"20px"}} width={150} height={150} src='/img/3.jpg' alt='keyboards'/>
+                <div>
+                  <p>Клавиатура проводная Razer BlackWidow V3 TKL RZ03-03490700-R3R1 механическая Razer Green, клавиш - 87, USB, черная</p>
+                  <b>5600 руб</b>
+                </div>
+                <img className='removeBtn' src='/img/remove-btn.svg' alt="delete"/>
+            </div>
+           </div>
+           <ul className='cartTotalBlock'>
+            <li>
+              <span>Итого</span>
+              <div></div>
+              <b>5600 руб.</b>
+            </li>
+           </ul>
+        </div>
+      </div>
+
       <header className="header">
          <div className='header__inner'>
             <h2>My shop</h2>
@@ -29,27 +60,259 @@ function App() {
       </div>
 
      
-      <div className='content'>
+      <div className='block'>
         <h2> Клавиатуры</h2>
         <div className='search__block'>
           <button className='search'>Найти</button>
           <input placeholder='Искать....'/>
         </div>
-        <ul className='container'>
+      </div>
+        <ul className='cards'>
           <li className='Card'>
-            <img width={250} height={250}src='/img/Клавиатура проводная Razer Huntsman Tournament Edition [RZ03-03081000-R3R1] [механическая Razer Linear Optical, клавиш - 87, USB, черная].jpg' alt='Клавиатура Razer'/>
+            <img src='/img/1.jpg' alt='Клавиатура Razer'/>
              <h3>Клавиатура проводная Razer Huntsman Tournament Edition RZ03-03081000-R3R1 механическая Razer Linear Optical, клавиш - 87, USB, черная</h3>
-             <div className="d-flex justify-between align-center">
-            <div className="d-flex flex-column ">
-            <span>Цена: </span>
-            <b>5500 руб.</b>
-            </div>
-              <img className="" alt="Plus"/>
-            </div>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/2.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Razer Huntsman RZ03-02521100-R3R1 оптомеханическая Razer Analog Optical, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/3.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Razer BlackWidow V3 TKL RZ03-03490700-R3R1 механическая Razer Green, клавиш - 87, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/4.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Razer Cynosa V2 RZ03-03400700-R3R1 мембранная, клавиш - 110, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/5.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Logitech G413 TKL SE 920-010447 механическая Kailh Brown, клавиш - 87, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/6.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура беспроводная Logitech K580 920-009275</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/7.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Logitech G413 CARBON 920-008309  механическая Logitech Romer-G Tactile, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/8.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Logitech G213 Prodigy</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/9.png' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная A4Tech Bloody S510 механическая Bloody BLMS RED, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/10.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная A4Tech Bloody B810R оптомеханическая A4Tech LK Light Strike Blue, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/11.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная A4Tech Bloody B820R Blue S оптомеханическая A4Tech LK Light Strike Blue, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/12.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная A4Tech Bloody B810RC B810RC механическая A4Tech LK Light Strike Blue, клавиш - 104, USB, белая</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/13.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Oklick 935G RAGNAR KL-95 механическая Blue, клавиш - 104, USB, серебристая</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/14.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура беспроводная Oklick 870S мембранная, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/15.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура беспроводная Oklick 840S [мембранная, клавиш - 80, Bluetooth, черная]</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/16.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная Oklick 920G механическая Outemu Blue, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/17.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная DEXP Tanto Rainbow механическая Outemu Blue, клавиш - 61, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/18.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная DEXP Black Sword RGB 4799872 механическая Outemu Blue, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/19.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная DEXP Anger TKL механическая Blue, клавиш - 87, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/20.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная DEXP Blazing Pro RGB SW-MK015 RGB механическая Outemu Blue, клавиш - 87, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/21.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная MSI Vigor GK30 плунжерная, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
+          </li>
+          <li className='Card'>
+            <img src='/img/22.jpg' alt='Клавиатура Razer'/>
+             <h3>Клавиатура проводная ZET GAMING Blade K180 механическая Kailh Red, клавиш - 104, USB, черная</h3>
+             <div className="Card__content">
+                <div className="d-flex flex-column ">
+                    <span>Цена: </span>
+                    <b>5500 руб.</b>
+                </div>
+                <button>В корзину</button>
+              </div>
           </li>
         </ul>
 
-      </div>
+      
     </div>
   );
 }
