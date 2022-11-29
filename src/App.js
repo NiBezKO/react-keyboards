@@ -10,7 +10,9 @@ function App() {
 
   const [keyboards, setKeyboards] = React.useState([]);
 
-  const [openCart, setOpenedCart] = React.useState(false);
+  const [openCart, setOpenCart] = React.useState(false);
+
+  const [cartItems, setCartItems] = React.useState([ ])
  
   
 
@@ -19,12 +21,16 @@ function App() {
     .then((res) => {return res.json()})
     .then(json => {setKeyboards(json)})
   }, [])
+  
+  const onAddToCart = (obj) => {
+    setCartItems([...cartItems, obj]);
+  }
 
   return (
     <div className="wrapper">
-      {openCart ? <Drawer /> : null}
+      {openCart && <Drawer keyboards={cartItems} onClose={() => setOpenCart(false)} />}
 
-      <Header onClickCart={() => setOpenedCart(true)}/>
+      <Header onClickCart={() => setOpenCart(true)}  />
       <div className="intro">
          <h1>Прикоснись к прекрасному кончиками пальцев</h1>
          <h2>Клавиатуры от самых лучших производителей</h2>
@@ -39,11 +45,13 @@ function App() {
         </div>
       </div>
         <ul className='cards'>
-          { keyboards.map((obj) =>
+          { keyboards.map((item) =>
             <Card
-            title={obj.title}
-            price={obj.price}
-            imageURL={obj.imageURL}
+            title={item.title}
+            price={item.price}
+            imageURL={item.imageURL}
+            onPlus={(obj) => onAddToCart(obj)}
+            clicKHeart={ () => console.log("Нажали на добавить в избранное")}
             />
           )}
          

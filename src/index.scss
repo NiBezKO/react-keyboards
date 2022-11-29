@@ -18,6 +18,16 @@ $font-f: 'Roboto';
     z-index: 1000;
     margin: 0 auto;
 
+    .favorite {
+        margin-right: 15px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 1s ease-in-out;
+        &:hover {
+            opacity: 1;
+        }
+    }
+
     &__inner {
         display: flex;
         justify-content: space-between;
@@ -35,6 +45,17 @@ $font-f: 'Roboto';
 .panel {
     display: flex;
     justify-content: space-between;
+    list-style-type: none;
+    
+    li {
+        display: flex;
+        cursor: pointer;
+        transition: scale 1s ease-in-out ;
+        &:hover {
+          transform: scale(1.05);
+        }
+    }
+
 
     svg {
         margin-right: 15px;
