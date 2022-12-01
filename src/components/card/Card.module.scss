@@ -9,6 +9,10 @@ $font-f: 'Roboto';
     font-family: $font-f;
     height: 100%;
     position: relative;
+    transition: transform 1s ease-in-out;
+    &:hover {
+        transform: translateY(-5px);
+    }
     
     .myFavorite {
         position: absolute;

@@ -12,7 +12,9 @@ function App() {
 
   const [openCart, setOpenCart] = React.useState(false);
 
-  const [cartItems, setCartItems] = React.useState([ ])
+  const [cartItems, setCartItems] = React.useState([]);
+
+  const [searchValue, setSearchValue] = React.useState("");
  
   
 
@@ -24,6 +26,10 @@ function App() {
   
   const onAddToCart = (obj) => {
     setCartItems([...cartItems, obj]);
+  }
+
+  const searchValueInput = (event) => {
+    setSearchValue(event.target.value);
   }
 
   return (
@@ -39,14 +45,21 @@ function App() {
      
       <div className='block'>
         <h2> Клавиатуры</h2>
+        <p>{searchValue ? `Поиск по запросу:"${searchValue}"` : null}</p>
         <div className='search__block'>
           <button className='search'>Найти</button>
-          <input placeholder='Искать....'/>
+          { searchValue ? <img className='clear' onClick={() => setSearchValue("")} src='/img/remove-btn.svg' alt="Стереть"/> : null}
+          <input 
+            value={searchValue} 
+            onChange={searchValueInput} 
+            placeholder='Искать....'/>
         </div>
       </div>
         <ul className='cards'>
-          { keyboards.map((item) =>
+          { keyboards.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((item) =>
             <Card
+            key={item.id}
             title={item.title}
             price={item.price}
             imageURL={item.imageURL}
@@ -63,3 +76,4 @@ function App() {
 }
 
 export default App;
+
