@@ -30,12 +30,12 @@ function App() {
   
   const onAddToCart = (obj) => {
     axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/cartk", obj);
-    setCartItems(prev => [...prev, obj])
+    setCartItems((prev) => [...prev, obj])
   }
   
   const onRemoveKeyboards = (id) => {
-    axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cartk${id}`);
-    setCartItems(prev => prev.filter((keyboards )=> keyboards.id !== id))
+    axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cartk/${id}`);
+    setCartItems((prev) => prev.filter((item)=> item.id !== id))
   }
 
   const searchValueInput = (event) => {
