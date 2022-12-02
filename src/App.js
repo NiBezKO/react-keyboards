@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import Drawer from "./components/Drawer";
 import Card from "./components/card/Card";
 import Header from "./components/Header";
 import './index.scss';
 
-
+//https://637fa1022f8f56e28e925aec.mockapi.io/cartk
 
 function App() {
 
@@ -19,13 +20,22 @@ function App() {
   
 
   useEffect(() => {
-    fetch("https://637fa1022f8f56e28e925aec.mockapi.io/keyboards")
-    .then((res) => {return res.json()})
-    .then(json => {setKeyboards(json)})
+    axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/keyboards")
+    .then((res) => {setKeyboards(res.data)
+    });
+    axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/cartk")
+    .then((res) => {setCartItems(res.data)
+    });
   }, [])
   
   const onAddToCart = (obj) => {
-    setCartItems([...cartItems, obj]);
+    axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/cartk", obj);
+    setCartItems(prev => [...prev, obj])
+  }
+  
+  const onRemoveKeyboards = (id) => {
+    axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cartk${id}`);
+    setCartItems(prev => prev.filter((keyboards )=> keyboards.id !== id))
   }
 
   const searchValueInput = (event) => {
@@ -34,7 +44,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      {openCart && <Drawer keyboards={cartItems} onClose={() => setOpenCart(false)} />}
+      {openCart && <Drawer keyboards={cartItems} onRemove={onRemoveKeyboards} onClose={() => setOpenCart(false)} />}
 
       <Header onClickCart={() => setOpenCart(true)}  />
       <div className="intro">
