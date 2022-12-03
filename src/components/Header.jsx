@@ -1,17 +1,22 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
   return (
     <header className="header">
          <div className='header__inner'>
-            <h2>My shop</h2>
+            <Link to="/">
+              <h2>My shop</h2>
+            </Link>
             <ul className="panel">
               <li onClick={props.onClickCart}>
                 <img  className='cart' width={20} height={20} src="./img/cart.svg" alt='Корзина' />
                 <p>5000</p>
               </li>
               <li>
-                <img src='./img/favorite.svg' width={20} height={20} className='favorite' alt="Избранное" />
+                <Link to="/favorite">
+                  <img src='./img/favorite.svg' width={20} height={20} className='favorite' alt="Избранное" />
+                </Link>
               </li>
               <li>
                 <svg className='account' width={20} height={20} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" >

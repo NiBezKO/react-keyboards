@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Drawer from "./components/Drawer";
-import Card from "./components/card/Card";
+import Home from "./Pages/Home";
 import Header from "./components/Header";
 import './index.scss';
 
@@ -16,6 +16,8 @@ function App() {
   const [cartItems, setCartItems] = React.useState([]);
 
   const [searchValue, setSearchValue] = React.useState("");
+
+  const [toFavorite, setToFavorite] = React.useState([]);
  
   
 
@@ -33,6 +35,11 @@ function App() {
     setCartItems((prev) => [...prev, obj])
   }
   
+  const onAddToFavorite = (obj) => {
+    axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/cartk", obj);
+    setToFavorite((prev) => [...prev, obj])
+  }
+
   const onRemoveKeyboards = (id) => {
     axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cartk/${id}`);
     setCartItems((prev) => prev.filter((item)=> item.id !== id))
@@ -53,32 +60,13 @@ function App() {
       </div>
 
      
-      <div className='block'>
-        <h2> Клавиатуры</h2>
-        <p>{searchValue ? `Поиск по запросу:"${searchValue}"` : null}</p>
-        <div className='search__block'>
-          <button className='search'>Найти</button>
-          { searchValue ? <img className='clear' onClick={() => setSearchValue("")} src='/img/remove-btn.svg' alt="Стереть"/> : null}
-          <input 
-            value={searchValue} 
-            onChange={searchValueInput} 
-            placeholder='Искать....'/>
-        </div>
-      </div>
-        <ul className='cards'>
-          { keyboards.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((item) =>
-            <Card
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            imageURL={item.imageURL}
-            onPlus={(obj) => onAddToCart(obj)}
-            clicKHeart={ () => console.log("Нажали на добавить в избранное")}
-            />
-          )}
-         
-        </ul>
+      <Home
+        keyboards={keyboards}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        searchValueInput={searchValueInput}
+        onAddToCart={onAddToCart}
+      />
 
       
     </div>
