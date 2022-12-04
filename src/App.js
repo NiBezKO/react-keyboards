@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
+import { Routes,Route } from "react-router-dom";
 import axios from "axios";
 import Drawer from "./components/Drawer";
 import Home from "./Pages/Home";
+import Favorites from "./Pages/Favorites";
 import Header from "./components/Header";
 import './index.scss';
+
 
 //https://637fa1022f8f56e28e925aec.mockapi.io/cartk
 
@@ -17,7 +20,7 @@ function App() {
 
   const [searchValue, setSearchValue] = React.useState("");
 
-  const [toFavorite, setToFavorite] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
  
   
 
@@ -28,6 +31,9 @@ function App() {
     axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/cartk")
     .then((res) => {setCartItems(res.data)
     });
+    axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/favorites").then((res) =>{ 
+      setFavorites(res.data)
+  });
   }, [])
   
   const onAddToCart = (obj) => {
@@ -35,9 +41,15 @@ function App() {
     setCartItems((prev) => [...prev, obj])
   }
   
-  const onAddToFavorite = (obj) => {
-    axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/cartk", obj);
-    setToFavorite((prev) => [...prev, obj])
+  const onAddToFavorite = (obj) =>  {
+    if (favorites.find((obj) => obj.id == obj.id )) {
+      axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/favorites/${obj.id}`);
+      setFavorites(prev => prev.filter((item ) => item.id !== obj.id))
+    } else {
+      axios.post('https://637fa1022f8f56e28e925aec.mockapi.io/favorites', obj)
+      .then(res => setFavorites(prev => [...prev, res.data])) 
+    }
+    
   }
 
   const onRemoveKeyboards = (id) => {
@@ -59,15 +71,17 @@ function App() {
          <h2>Клавиатуры от самых лучших производителей</h2>
       </div>
 
-     
-      <Home
-        keyboards={keyboards}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        searchValueInput={searchValueInput}
-        onAddToCart={onAddToCart}
-      />
-
+     <Routes>
+        <Route path="/" exact element={<Home 
+            keyboards={keyboards}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            searchValueInput={searchValueInput}
+            onAddToCart={onAddToCart}
+          />}>
+          </Route>
+          <Route path="/favorite" exact element={<Favorites keyboards={favorites} onAddToFavorite={onAddToFavorite} onAddToCart={onAddToCart} />}></Route>
+      </Routes>
       
     </div>
   );
