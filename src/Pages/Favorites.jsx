@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../components/card/Card'
 
-const Favorites = ({keyboards, onAddTofavorite, onAddToCart}) => {
+const Favorites = ({keyboards, onAddToFavorite, onAddToCart}) => {
   return (
     <div>
       <div className='block'>
@@ -15,7 +15,8 @@ const Favorites = ({keyboards, onAddTofavorite, onAddToCart}) => {
             price={item.price}
             imageURL={item.imageURL}
             onPlus={onAddToCart}
-            onFavorite = {onAddTofavorite}
+            onFavorite = {onAddToFavorite}
+            favorited={true}
             />
           )}
          
