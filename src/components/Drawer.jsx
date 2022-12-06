@@ -14,7 +14,7 @@ const Drawer = ({onClose, onRemove, keyboards=[], }) => {
             <div>
                 <div className='items'>
                   {keyboards.map((obj) => (
-                      <div className='cartItems'>
+                      <div key={obj.id} className='cartItems'>
                         <img style={ {marginRight:"20px"}} width={150} height={150} src={obj.imageURL} alt='keyboards'/>
                           <div>
                             <p>{obj.title}</p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../components/card/Card';
+import Card from '../components/card';
 
 
 const Home = ({
@@ -7,6 +7,7 @@ const Home = ({
     searchValue,
     setSearchValue,
     searchValueInput,
+    onAddToFavorite, 
     onAddToCart,
     }) => {
   return (
@@ -32,7 +33,8 @@ const Home = ({
             price={item.price}
             imageURL={item.imageURL}
             onPlus={(obj) => onAddToCart(obj)}
-            clicKHeart={ () => console.log("Нажали на добавить в избранное")}
+            onFavorite = {(obj) => onAddToFavorite(obj)}
+            
             />
           )}
          
