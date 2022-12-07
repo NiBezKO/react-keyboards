@@ -22,12 +22,13 @@ function App() {
 
   const [favorites, setFavorites] = React.useState([]);
  
+  const [isLoading, setLoading] = React.useState(true);
   
 
   useEffect(() => {
     axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/keyboards")
     .then((res) => {setKeyboards(res.data)
-    });
+    }).finally(() =>setLoading(false));
     axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/cartk")
     .then((res) => {setCartItems(res.data)
     });
@@ -83,12 +84,14 @@ function App() {
       </div>
 
      <Routes>
-        <Route path="/" exact element={<Home 
+        <Route path="/" exact 
+        element={<Home 
             keyboards={keyboards}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             searchValueInput={searchValueInput}
             onAddToCart={onAddToCart}
+            isLoading={isLoading}
           />}>
           </Route>
           <Route path="/favorite" exact element={<Favorites keyboards={favorites} onAddToFavorite={onAddToFavorite} onAddToCart={onAddToCart} />}></Route>

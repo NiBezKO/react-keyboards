@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../components/card';
+import Skeleton from '../components/Skeleton';
 
 
 const Home = ({
@@ -9,6 +10,7 @@ const Home = ({
     searchValueInput,
     onAddToFavorite, 
     onAddToCart,
+    isLoading,
     }) => {
   return (
     <div>
@@ -25,20 +27,37 @@ const Home = ({
         </div>
       </div>
         <ul className='cards'>
-          { keyboards.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((item) =>
-            <Card
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            imageURL={item.imageURL}
-            onPlus={(obj) => onAddToCart(obj)}
-            onFavorite = {(obj) => onAddToFavorite(obj)}
-            
-            />
-          )}
-         
-        </ul>
+              {isLoading ? (
+              <div className="skeleton-list">
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+              </div>
+              ) : ( 
+            <>
+              { keyboards.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((item) =>
+                <Card
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                imageURL={item.imageURL}
+                onPlus={(obj) => onAddToCart(obj)}
+                onFavorite = {(obj) => onAddToFavorite(obj)}
+                />
+              )}
+            </>
+            ) }
+         </ul>
     </div>
   )
 }
