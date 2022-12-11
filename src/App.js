@@ -5,6 +5,7 @@ import Drawer from "./components/Drawer";
 import Home from "./Pages/Home";
 import Favorites from "./Pages/Favorites";
 import Header from "./components/Header";
+import AppContext from './context';
 import './index.scss';
 
 
@@ -26,54 +27,63 @@ function App() {
   
 
   useEffect(() => {
-    axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/keyboards")
-    .then((res) => {setKeyboards(res.data)
-    }).finally(() =>setLoading(false));
-    axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/cartk")
-    .then((res) => {setCartItems(res.data)
-    });
-    axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/favorites").then((res) =>{ 
-      setFavorites(res.data)
-  });
+     async function fetchData() {
+      setLoading(true)
+      const cartResponse = await axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/cart");
+      const favoritesResponse = await axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/favorites");
+      const keyboardsResponse = await axios.get("https://637fa1022f8f56e28e925aec.mockapi.io/keyboards");
+      setLoading(false)
+
+      setCartItems(cartResponse.data);
+      setFavorites(favoritesResponse.data);
+      setKeyboards(keyboardsResponse.data);
+      console.log(favoritesResponse.data)
+     }
+     
+     fetchData();
   }, [])
   
   const onAddToCart = (obj) => {
+    console.log(obj);
 
-    if ( cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-      setCartItems((prev )=> prev.filter(item => Number(item.id) !== Number(obj.id)))
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cart/${obj.id}`);
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
     } else {
-      axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/cartk", obj);
-      setCartItems((prev) => [...prev, obj])
+      axios.post('https://637fa1022f8f56e28e925aec.mockapi.io/cart', obj);
+      setCartItems((prev) => [...prev, obj]);
     }
-
-  }
+  };
   
-  const onAddToFavorite = (obj) =>  {
+  {/*const onAddToFavorite = (obj) => {
+    axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/favorites");
+    setFavorites((prev) => [...prev.obj])
+  }*/}
+  
+ const onAddToFavorite = async (obj) => {
    try {
-    if (favorites.find((favObj) => favObj.id == obj.id )) {
+    if (favorites.find((favObj) => Number(favObj.id) !== Number(obj.id))) {
       axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/favorites/${obj.id}`);
-      setFavorites(prev => prev.filter((item ) => item.id !== obj.id))
-    } else {
-      axios.post('https://637fa1022f8f56e28e925aec.mockapi.io/favorites', obj)
-      .then(res => setFavorites(prev => [...prev, res.data])) 
-    }
-    
+      setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
+     } else {
+      const {data} = await axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/favorites", obj)
+      setFavorites((prev) => [...prev, data ]);
+     }
    } catch (error) {
-     alert("Неудалось добавить в закладки")
+    alert("Не удалось добавить в избранное")
    }
-    
-  }
-
+ }
   const onRemoveKeyboards = (id) => {
-    axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cartk/${id}`);
-    setCartItems((prev) => prev.filter((item)=> item.id !== id))
-  }
+    axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cart/${id}`);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
 
   const searchValueInput = (event) => {
     setSearchValue(event.target.value);
   }
 
   return (
+    <AppContext.Provider value={{keyboards, cartItems, favorites, onAddToFavorite }}>
     <div className="wrapper">
       {openCart && <Drawer keyboards={cartItems} onRemove={onRemoveKeyboards} onClose={() => setOpenCart(false)} />}
 
@@ -94,10 +104,14 @@ function App() {
             isLoading={isLoading}
           />}>
           </Route>
-          <Route path="/favorite" exact element={<Favorites keyboards={favorites} onAddToFavorite={onAddToFavorite} onAddToCart={onAddToCart} />}></Route>
+          <Route path="/favorites" exact 
+              element={<Favorites />}>
+
+          </Route>
       </Routes>
       
     </div>
+    </AppContext.Provider>
   );
 }
 

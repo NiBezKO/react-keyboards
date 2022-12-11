@@ -11,7 +11,9 @@ const Home = ({
     onAddToFavorite, 
     onAddToCart,
     isLoading,
+    
     }) => {
+      console.log(onAddToFavorite)
   return (
     <div>
       <div className='block'>
@@ -51,8 +53,8 @@ const Home = ({
                 title={item.title}
                 price={item.price}
                 imageURL={item.imageURL}
-                onPlus={(obj) => onAddToCart(obj)}
-                onFavorite = {(obj) => onAddToFavorite(obj)}
+                onFavotite={(obj) => onAddToFavorite(obj)}
+                onPlus = {(obj) => onAddToCart(obj)}
                 />
               )}
             </>

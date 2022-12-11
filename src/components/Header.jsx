@@ -14,7 +14,7 @@ const Header = (props) => {
                 <p>5000</p>
               </li>
               <li>
-                <Link to="/favorite">
+                <Link to="/favorites">
                   <img src='./img/favorite.svg' width={20} height={20} className='favorite' alt="Избранное" />
                 </Link>
               </li>
