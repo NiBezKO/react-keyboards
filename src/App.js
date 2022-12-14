@@ -38,6 +38,7 @@ function App() {
       setFavorites(favoritesResponse.data);
       setKeyboards(keyboardsResponse.data);
       console.log(favoritesResponse.data)
+      console.log(keyboardsResponse.data)
      }
      
      fetchData();
@@ -55,12 +56,8 @@ function App() {
     }
   };
   
-  {/*const onAddToFavorite = (obj) => {
-    axios.post("https://637fa1022f8f56e28e925aec.mockapi.io/favorites");
-    setFavorites((prev) => [...prev.obj])
-  }*/}
-  
  const onAddToFavorite = async (obj) => {
+  console.log(onAddToFavorite )
    try {
     if (favorites.find((favObj) => Number(favObj.id) !== Number(obj.id))) {
       axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/favorites/${obj.id}`);
@@ -73,17 +70,27 @@ function App() {
     alert("Не удалось добавить в избранное")
    }
  }
+
   const onRemoveKeyboards = (id) => {
-    axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cart/${id}`);
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    try {
+      axios.delete(`https://637fa1022f8f56e28e925aec.mockapi.io/cart/${id}`);
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
+    } catch (error) {
+      alert('Ошибка при удалении из корзины');
+      console.error(error);
+    }
   };
 
   const searchValueInput = (event) => {
     setSearchValue(event.target.value);
   }
+  
+  const isItemAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
 
   return (
-    <AppContext.Provider value={{keyboards, cartItems, favorites, onAddToFavorite }}>
+    <AppContext.Provider value={{keyboards, cartItems, favorites, onAddToFavorite, isItemAdded, setOpenCart, setCartItems, }}>
     <div className="wrapper">
       {openCart && <Drawer keyboards={cartItems} onRemove={onRemoveKeyboards} onClose={() => setOpenCart(false)} />}
 
@@ -96,6 +103,7 @@ function App() {
      <Routes>
         <Route path="/" exact 
         element={<Home 
+            cartItems={cartItems}
             keyboards={keyboards}
             searchValue={searchValue}
             setSearchValue={setSearchValue}

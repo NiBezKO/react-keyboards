@@ -1,6 +1,34 @@
-import React from 'react'
+import React from 'react';
+import Info from './Info';
+import AppContext from '../context';
+import axios from "axios";;
 
-const Drawer = ({onClose, onRemove, keyboards=[], }) => {
+const Drawer = ({onClose, onRemove, keyboards=[],}) => {
+
+  const [isOrderComplete, setIsOrderComplete] = React.useState(false)
+
+  const [orderId, setOrderId] = React.useState(null)
+
+  const [isLoading, setLoading] = React.useState(true);
+
+  const {cartItems,setCartItems} = React.useContext(AppContext)
+  
+  const onClickOrder = async () => {
+    try {
+      setLoading(true)
+      const {data} = await  axios.post('https://637fa1022f8f56e28e925aec.mockapi.io/orders', {
+        items: cartItems
+      });
+      await axios.put('https://637fa1022f8f56e28e925aec.mockapi.io/cart', []);
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+    } catch (error) {
+      alert("Не удалось оформить заказ :(")
+    }
+    setLoading(false)
+  }
+
   return (
     <div  className='overlay'>
         <div className='drawer'>
@@ -11,7 +39,7 @@ const Drawer = ({onClose, onRemove, keyboards=[], }) => {
 
 
            {keyboards.length > 0 ? (
-            <div>
+            <div className='itemsContainer'>
                 <div className='items'>
                   {keyboards.map((obj) => (
                       <div key={obj.id} className='cartItems'>
@@ -36,12 +64,15 @@ const Drawer = ({onClose, onRemove, keyboards=[], }) => {
                       <b>5600 руб.</b>
                     </li>
                   </ul>
-                <button className='btnPay'>Оплатить</button>
+                <button onClick={onClickOrder} className='btnPay'>Оплатить</button>
                 </div>
                
           </div>) 
           :
-          <h3 className='cartEmpty'>Корзина пуста</h3>
+          (<Info
+          title={isOrderComplete ? "Заказ оформлен" :"Корзина пустая"}
+          description={isOrderComplete ? `Ожидайте СМС оповещения, для того что бы забрать заказ #${orderId}` : "Добавьте сюда товар для оформления заказа"}
+          />)
            }
            
         </div>

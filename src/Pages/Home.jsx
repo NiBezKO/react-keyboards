@@ -3,6 +3,7 @@ import Card from '../components/card';
 import Skeleton from '../components/Skeleton';
 
 
+
 const Home = ({
     keyboards,
     searchValue,
@@ -11,9 +12,8 @@ const Home = ({
     onAddToFavorite, 
     onAddToCart,
     isLoading,
-    
+
     }) => {
-      console.log(onAddToFavorite)
   return (
     <div>
       <div className='block'>
@@ -53,8 +53,9 @@ const Home = ({
                 title={item.title}
                 price={item.price}
                 imageURL={item.imageURL}
-                onFavotite={(obj) => onAddToFavorite(obj)}
+                onFavorite={(obj) => onAddToFavorite(obj)}
                 onPlus = {(obj) => onAddToCart(obj)}
+                
                 />
               )}
             </>

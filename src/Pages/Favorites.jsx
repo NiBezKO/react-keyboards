@@ -2,10 +2,10 @@ import React from 'react';
 import Card from '../components/card';
 import AppContext from '../context';
 
-const Favorites = ({ onAddToFavorite}) => {
+const Favorites = () => {
 
-  const  {favorites} = React.useContext(AppContext);
-
+  const  {favorites, onAddToFavorite} = React.useContext(AppContext);
+  console.log(favorites)
   return (
     <div>
       <div className='block'>
@@ -14,13 +14,9 @@ const Favorites = ({ onAddToFavorite}) => {
         <ul className='cards'>
           { favorites.map((item) =>
             <Card
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            imageURL={item.imageURL}
-            
             onFavorite={onAddToFavorite}
             favorited={true}
+            {...item}
             />
           )}
          

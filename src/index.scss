@@ -180,6 +180,13 @@ $font-f: 'Roboto';
     z-index: 10;
 }
 
+.itemsContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
 .drawer {
     display: flex;flex-direction: column;
     position: fixed;
@@ -226,9 +233,35 @@ $font-f: 'Roboto';
 }
 
 .cartEmpty {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
-    justify-items: center;
+
+    h2 {
+        text-align: center;
+        justify-items: center;
+    }
+    
+    p {
+        text-align: center;
+        justify-items: center;
+    }
+
+    .btnEmpty {
+        width: 100%;
+        height: 60px;
+        margin-top: 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-weight: 700;
+        font-family: $font-f;
+        background-color: #8a7b7b;
+        transition: background-color 1s ease-in-out;
+        &:hover {
+            background-color: $white;
+        }
+    }
+
 }
 
 

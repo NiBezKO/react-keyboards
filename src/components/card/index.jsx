@@ -1,5 +1,5 @@
 import React from 'react';
-
+import AppContext from '../../context';
 import styles from './Card.module.scss';
 
 
@@ -11,26 +11,29 @@ const Card = ({
   onFavorite, 
   onPlus, 
   favorited = false, 
+  added=false
 }) => {
- 
-  const [isAdded, setIsAdded] = React.useState(false);
   
+  const  {isItemAdded} = React.useContext(AppContext);
+
   const [isFavorite, setIsFavorite] = React.useState(favorited);
 
+  const obj = { id, title, imageURL, price };
+
   const onClickAdd = () => {
-    onPlus({imageURL, title, price, id});
-    setIsAdded(!isAdded);
+    onPlus(obj);
+    
   }
 
   const onClickFavorite = () => {
-    onFavorite({imageURL, title, price, id})
+    onFavorite(obj);
     setIsFavorite(!isFavorite);
-  }
+  };
  
   return (
-    <div>
-        <li className={styles.card}>
-          <img className={styles.myFavorite}  onClick={onClickFavorite } width={25} height={25} src={ isFavorite ? "./img/my-favoriteTrue.png" : "./img/my-favorite.svg"} alt="favorite" />
+      <>
+        <li key={id}  className={styles.card}>
+          <img className={styles.myFavorite}  onClick={onClickFavorite} width={25} height={25} src={ isFavorite ? "./img/my-favoriteTrue.png" : "./img/my-favorite.svg"} alt="favorite" />
 
           <img className={styles.imageURL} src={imageURL} alt='Клавиатура Razer'/>
               <h3>{title}</h3>
@@ -44,12 +47,12 @@ const Card = ({
                     onClick={onClickAdd} 
                     width={40} 
                     height={40} 
-                    src={isAdded ?  "./img/btn-checked.svg"  : "./img/plus.svg" } 
+                    src={isItemAdded(id) ?  "./img/btn-checked.svg"  : "./img/plus.svg" } 
                     alt="добавить" 
                     />
               </div>
         </li>
-      </div>
+      </>
   )
 }
 
