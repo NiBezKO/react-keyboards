@@ -1,7 +1,10 @@
 import React from 'react';
 import Info from './Info';
 import AppContext from '../context';
-import axios from "axios";;
+import axios from "axios";
+
+const  delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 
 const Drawer = ({onClose, onRemove, keyboards=[],}) => {
 
@@ -12,6 +15,8 @@ const Drawer = ({onClose, onRemove, keyboards=[],}) => {
   const [isLoading, setLoading] = React.useState(true);
 
   const {cartItems,setCartItems} = React.useContext(AppContext)
+
+  const totalPrice = cartItems.reduce((sum, obj)=> obj.price + sum, 0 )
   
   const onClickOrder = async () => {
     try {
@@ -19,10 +24,16 @@ const Drawer = ({onClose, onRemove, keyboards=[],}) => {
       const {data} = await  axios.post('https://637fa1022f8f56e28e925aec.mockapi.io/orders', {
         items: cartItems
       });
-      await axios.put('https://637fa1022f8f56e28e925aec.mockapi.io/cart', []);
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
+      
+      for (let i = 0; i < cartItems.length; i++) {
+           const item =  cartItems[i];
+           await  axios.delete('https://637fa1022f8f56e28e925aec.mockapi.io/cart/' + item.id)
+           await delay(1000);
+      }
+     
     } catch (error) {
       alert("Не удалось оформить заказ :(")
     }
@@ -61,7 +72,7 @@ const Drawer = ({onClose, onRemove, keyboards=[],}) => {
                     <li>
                       <span>Итого</span>
                       <div></div>
-                      <b>5600 руб.</b>
+                      <b>{totalPrice} руб.</b>
                     </li>
                   </ul>
                 <button onClick={onClickOrder} className='btnPay'>Оплатить</button>
