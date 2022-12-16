@@ -12,7 +12,6 @@ const Home = ({
     onAddToFavorite, 
     onAddToCart,
     isLoading,
-
     }) => {
   return (
     <div>

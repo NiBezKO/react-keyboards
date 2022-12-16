@@ -14,6 +14,7 @@ const Favorites = () => {
         <ul className='cards'>
           { favorites.map((item) =>
             <Card
+            key={item.id}
             onFavorite={onAddToFavorite}
             favorited={true}
             {...item}
