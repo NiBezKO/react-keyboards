@@ -36,7 +36,7 @@ $font-f: 'Roboto';
 
         h2 {
             font-family: $font-f;
-            text-decoration: none;
+            color: $black;
         }
 
     }
@@ -188,7 +188,8 @@ $font-f: 'Roboto';
 
 
 .drawer {
-    display: flex;flex-direction: column;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     width: 400px;
     right: 0;
@@ -236,6 +237,14 @@ $font-f: 'Roboto';
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
+    .cartDescroption {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      flex: 1;
+    }
 
     h2 {
         text-align: center;

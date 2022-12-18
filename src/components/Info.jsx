@@ -7,9 +7,11 @@ const Info = ({title, description}) => {
 
   return (
     <div className='cartEmpty'>
+      <div className='cartDescroption'>
         <h2>{title}</h2>
         <p>{description}</p>
-        <button onClick={() => setOpenCart(false)} className='btnEmpty'>Вернуться назад</button>
+      </div>
+      <button onClick={() => setOpenCart(false)} className='btnEmpty'>Вернуться назад</button>
   </div>
   )
 }
