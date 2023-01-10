@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-keyboards/static/css/main.c14b54d7.css",
-    "main.js": "/react-keyboards/static/js/main.d74d2b5a.js",
+    "main.js": "/react-keyboards/static/js/main.a5f5de04.js",
     "static/media/introBG.jpg": "/react-keyboards/static/media/introBG.37c0799b3f6fb901dbd0.jpg",
     "index.html": "/react-keyboards/index.html",
     "main.c14b54d7.css.map": "/react-keyboards/static/css/main.c14b54d7.css.map",
-    "main.d74d2b5a.js.map": "/react-keyboards/static/js/main.d74d2b5a.js.map"
+    "main.a5f5de04.js.map": "/react-keyboards/static/js/main.a5f5de04.js.map"
   },
   "entrypoints": [
     "static/css/main.c14b54d7.css",
-    "static/js/main.d74d2b5a.js"
+    "static/js/main.a5f5de04.js"
   ]
 }
